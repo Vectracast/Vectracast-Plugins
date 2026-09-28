@@ -1,0 +1,60 @@
+{
+  "manifestVersion": 1,
+  "id": "local.plugin-store",
+  "name": "插件商店",
+  "version": "0.1.1",
+  "description": "从公开仓库发现、搜索和安装插件，查看插件说明、版本、命令与权限。",
+  "runtime": "standard-js",
+  "sdk": "0.1",
+  "icon": "square.stack.3d.up",
+  "entry": "src/index.ts",
+  "commands": [
+    {
+      "id": "store",
+      "title": "插件商店",
+      "keywords": [
+        "store",
+        "plugins"
+      ],
+      "acceptsEmptyQuery": true,
+      "presentation": "list",
+      "searchPlaceholder": "搜索插件商店…",
+      "debounceMs": 200,
+      "filters": [
+        {
+          "id": "all",
+          "title": "所有分类"
+        },
+        {
+          "id": "productivity",
+          "title": "效率工具"
+        },
+        {
+          "id": "developer",
+          "title": "开发工具"
+        },
+        {
+          "id": "language",
+          "title": "语言与文本"
+        },
+        {
+          "id": "installed",
+          "title": "已安装"
+        }
+      ]
+    }
+  ],
+  "permissions": {
+    "catalog": [
+      "read",
+      "install"
+    ],
+    "browser": [
+      "open"
+    ],
+    "clipboard": [
+      "write"
+    ]
+  },
+  "preferences": []
+}
