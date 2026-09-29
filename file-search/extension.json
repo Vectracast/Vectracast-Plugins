@@ -1,0 +1,23 @@
+{
+  "manifestVersion": 1,
+  "id": "local.file-search",
+  "name": "文件检索",
+  "version": "0.1.0",
+  "description": "按文件名搜索用户目录中的文件与文件夹，支持类型筛选、打开文件、Finder 定位和复制路径。使用本机 Spotlight 索引，无需联网。",
+  "runtime": "standard-js",
+  "sdk": "0.1",
+  "icon": "doc.text.magnifyingglass",
+  "entry": "src/index.ts",
+  "commands": [{
+    "id": "files", "title": "搜索文件", "keywords": ["file", "files"],
+    "acceptsEmptyQuery": true, "presentation": "list", "debounceMs": 200,
+    "searchPlaceholder": "搜索文件名…",
+    "filters": [
+      {"id":"all","title":"所有类型"}, {"id":"folder","title":"文件夹"},
+      {"id":"document","title":"文档"}, {"id":"image","title":"图片"},
+      {"id":"audio","title":"音频"}, {"id":"video","title":"视频"}, {"id":"other","title":"其他文件"}
+    ]
+  }],
+  "permissions": {"files":["search","open"],"clipboard":["write"]},
+  "preferences": []
+}

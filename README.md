@@ -4,6 +4,10 @@
 
 用户在 Vectracast 的「设置 → 扩展 → 发现插件」首次安装商店，之后输入 `store` 搜索安装，也可以从 Releases 下载 `.launcher-extension` 文件后本地安装，无需 Node.js。
 
+## 文件检索
+
+[文件检索](file-search/README.md)支持按文件名搜索、筛选类型、打开文件和 Finder 定位，需要宿主 0.8.0 或更新版本。
+
 ## 提交插件
 
 提交 Pull Request，包含插件源码、使用说明和权限用途。修改已发布插件时提高 `extension.json` 的版本号；相同版本的安装包内容不可改变。

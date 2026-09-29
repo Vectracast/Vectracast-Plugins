@@ -1,7 +1,27 @@
 {
-  "manifestVersion": 1, "id": "local.applications", "name": "应用搜索", "version": "0.2.0",
-  "description": "直接输入应用名称、拼音或拼音首字母搜索，回车打开。匹配和排序由本扩展提供。", "runtime": "standard-js", "sdk": "0.1",
-  "icon": "square.grid.2x2", "entry": "src/index.ts",
-  "commands": [{ "id": "search", "title": "搜索应用", "keywords": [], "inputMode": "query", "debounceMs": 80 }],
-  "permissions": { "applications": ["read", "open"] }, "preferences": []
+  "manifestVersion": 1,
+  "id": "local.applications",
+  "name": "应用搜索",
+  "version": "0.2.1",
+  "description": "直接输入应用名称、拼音或拼音首字母搜索，回车打开。匹配和排序由本扩展提供。",
+  "runtime": "standard-js",
+  "sdk": "0.1",
+  "icon": "square.grid.2x2",
+  "entry": "src/index.ts",
+  "commands": [
+    {
+      "id": "search",
+      "title": "搜索应用",
+      "keywords": [],
+      "inputMode": "query",
+      "debounceMs": 80
+    }
+  ],
+  "permissions": {
+    "applications": [
+      "read",
+      "open"
+    ]
+  },
+  "preferences": []
 }
