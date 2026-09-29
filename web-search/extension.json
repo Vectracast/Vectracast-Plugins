@@ -1,0 +1,34 @@
+{
+  "manifestVersion": 1,
+  "id": "local.web-search",
+  "name": "网页搜索",
+  "version": "0.1.0",
+  "description": "没有匹配到本地结果时，使用 Google 或百度搜索关键词和网站；选择后在浏览器打开。",
+  "runtime": "standard-js",
+  "sdk": "0.1",
+  "icon": "globe",
+  "entry": "src/index.ts",
+  "commands": [
+    {
+      "id": "web",
+      "title": "网页搜索",
+      "keywords": ["web"],
+      "inputMode": "query",
+      "debounceMs": 80
+    },
+    {
+      "id": "google",
+      "title": "Google 搜索",
+      "keywords": ["google"],
+      "debounceMs": 80
+    },
+    {
+      "id": "baidu",
+      "title": "百度搜索",
+      "keywords": ["baidu"],
+      "debounceMs": 80
+    }
+  ],
+  "permissions": {"browser": ["open"]},
+  "preferences": []
+}
