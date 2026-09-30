@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "local.file-search",
   "name": "文件检索",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "按文件名搜索用户目录中的文件与文件夹，支持类型筛选、打开文件、Finder 定位和复制路径。使用本机 Spotlight 索引，无需联网。",
   "runtime": "standard-js",
   "sdk": "0.1",

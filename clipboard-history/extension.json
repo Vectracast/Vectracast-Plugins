@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "local.clipboard-history",
   "name": "剪贴板历史",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "本地保存文本、链接和图片剪贴板；支持类型筛选、完整预览、复制与粘贴。最多 200 条、保留 7 天，停用后停止记录。",
   "runtime": "standard-js",
   "sdk": "0.1",

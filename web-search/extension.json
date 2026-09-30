@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "local.web-search",
   "name": "网页搜索",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "没有匹配到本地结果时，使用 Google 或百度搜索关键词和网站；选择后在浏览器打开。",
   "runtime": "standard-js",
   "sdk": "0.1",
@@ -13,7 +13,7 @@
       "id": "web",
       "title": "网页搜索",
       "keywords": ["web"],
-      "inputMode": "query",
+      "inputMode": "fallback",
       "debounceMs": 80
     },
     {

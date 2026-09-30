@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "local.plugin-store",
   "name": "插件商店",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "从公开仓库发现、搜索和安装插件，查看插件说明、版本、命令与权限。",
   "runtime": "standard-js",
   "sdk": "0.1",
