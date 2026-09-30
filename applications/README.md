@@ -2,13 +2,13 @@
 
 直接输入应用名称、全拼或拼音首字母，选择后回车打开。命令没有关键词，以 `inputMode: "query"` 接入底座。
 
-匹配、排序、条数限制都在 `src/index.ts`：名称/搜索别名精确匹配优先，其次前缀、包含匹配，最多 30 条。适中模式支持英文词首缩写，宽松模式增加从名称开头开始的有序字符模糊匹配；设置来自 SDK `ctx.search.sensitivity`，旧宿主回退为适中。宿主提供目录元数据和系统打开能力，不负责匹配搜索。
+匹配、排序、条数限制都在 `src/index.ts`：名称/搜索别名精确匹配优先，其次前缀、包含匹配；Bundle ID 按组件提供搜索别名，例如 `Apple` 可以找出 `com.apple.*` 应用，但不会让 `com` 这种泛词匹配所有结果。适中模式支持英文词首缩写和 Bundle ID 组件前缀，宽松模式增加名称与 ID 的有序字符匹配；最多显示 30 条。设置来自 SDK `ctx.search.sensitivity`，旧宿主回退为适中。宿主提供目录元数据和系统打开能力，不负责匹配搜索。
 
 ## 安装
 
 ```sh
 npm run platform -- pack extensions/applications
-npm run platform -- install extensions/applications/dist/local.applications-0.2.0.launcher-extension --accept-permissions
+npm run platform -- install extensions/applications/dist/local.applications-0.2.2.launcher-extension --accept-permissions
 npm run platform -- search Finder
 ```
 

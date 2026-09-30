@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "local.youdao",
   "name": "有道翻译",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "直接输入 yd + 内容，在主搜索框查看有道官方译文。",
   "runtime": "standard-js",
   "sdk": "0.1",

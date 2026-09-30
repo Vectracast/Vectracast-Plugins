@@ -14,6 +14,19 @@ function rank(app: Application, query: string, sensitivity: string): number {
   if (names.includes(query) || joinedNames.includes(joinedQuery)) return 0;
   if (names.some(name => name.startsWith(query)) || joinedNames.some(name => name.startsWith(joinedQuery))) return 1;
   if (names.some(name => name.includes(query)) || joinedNames.some(name => name.includes(joinedQuery))) return 2;
+  // Bundle identifiers are useful aliases for brand searches such as "Apple".
+  // Match complete components to avoid flooding results with generic pieces like "com".
+  const bundleID = normalize(app.bundleIdentifier ?? "");
+  const bundleParts = bundleID.split(/[.\-_]+/u).filter(Boolean);
+  const queryParts = query.split(/[.\-_]+/u).filter(Boolean);
+  if (queryParts.length > 1) {
+    const offset = bundleParts.findIndex((_, index) => queryParts.every((part, partIndex) => bundleParts[index + partIndex] === part));
+    if (offset >= 0) return queryParts.length === bundleParts.length && offset === 0 ? 0.5 : 1.5;
+  } else if (query.length >= 2 && !["com", "org", "net"].includes(query)) {
+    if (bundleParts.includes(query)) return 2.5;
+    if (sensitivity !== "high" && bundleParts.some(part => part.startsWith(query))) return 3;
+    if (sensitivity === "low" && bundleParts.some(part => part.includes(query))) return 4;
+  }
   // Category matching belongs to the plugin; exact application names keep priority.
   if (categoryTerms.some(term => compact(normalize(term)) === joinedQuery)) return 2.5;
   if (sensitivity === "high" || query.length < 2) return -1;
