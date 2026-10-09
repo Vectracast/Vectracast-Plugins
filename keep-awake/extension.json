@@ -2,21 +2,25 @@
   "manifestVersion": 1,
   "id": "local.keep-awake",
   "name": "保持唤醒",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "查看供电与休眠状态，开启合盖保持唤醒，并恢复原设置。修改系统设置需要管理员授权。",
   "runtime": "standard-js",
   "sdk": "0.1",
   "icon": "cup.and.saucer",
   "entry": "src/index.ts",
-  "commands": [{
-    "id": "awake",
-    "title": "合盖保持唤醒",
-    "keywords": ["awake", "nosleep"],
-    "acceptsEmptyQuery": true,
-    "presentation": "list",
-    "searchPlaceholder": "搜索保持唤醒操作…",
-    "icon": "cup.and.saucer"
-  }],
-  "permissions": { "power": ["read", "manage"] },
+  "commands": [
+    {
+      "id": "awake",
+      "title": "合盖保持唤醒",
+      "keywords": ["awake", "nosleep"],
+      "acceptsEmptyQuery": true,
+      "presentation": "list",
+      "searchPlaceholder": "搜索保持唤醒操作…",
+      "icon": "cup.and.saucer"
+    }
+  ],
+  "permissions": {
+    "power": ["read", "manage"]
+  },
   "preferences": []
 }

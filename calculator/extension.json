@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "local.calculator",
   "name": "计算器",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "直接输入算式或进制数字，无需关键词。支持四则运算、幂、取余和二/八/十/十六进制转换。",
   "runtime": "standard-js",
   "sdk": "0.1",
@@ -12,17 +12,13 @@
     {
       "id": "calculate",
       "title": "计算与进制转换",
-      "keywords": [
-        "calc"
-      ],
+      "keywords": ["calc"],
       "inputMode": "query",
       "debounceMs": 80
     }
   ],
   "permissions": {
-    "clipboard": [
-      "write"
-    ]
+    "clipboard": ["write"]
   },
   "preferences": []
 }
