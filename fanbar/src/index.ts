@@ -4,6 +4,8 @@ import {
   openApplicationAction,
   openURLAction,
   type Application,
+  type Action,
+  type FanBarStatus,
   type ResultItem,
 } from "@platform/sdk";
 
@@ -41,11 +43,89 @@ function unavailable(): ResultItem {
   };
 }
 
+const refresh: Action = {
+  id: "refresh",
+  title: "刷新 FanBar 状态",
+  type: "fanbar.refresh",
+  text: "",
+  icon: "arrow.clockwise",
+};
+const presetNames = ["静音", "均衡", "性能", "极速"];
+
+function statusItems(status: FanBarStatus): ResultItem[] {
+  const manual = status.fans.some((fan) => fan.isManual);
+  const rows: ResultItem[] = [
+    {
+      id: "fanbar-status",
+      title: manual ? "FanBar 手动控制中" : "FanBar 自动控制中",
+      subtitle: status.fans.length
+        ? status.fans
+            .map(
+              (fan) =>
+                `风扇 ${fan.index + 1} · ${fan.currentRPM} RPM${fan.isManual ? " · 手动" : ""}`,
+            )
+            .join("  ")
+        : "未检测到风扇",
+      icon: manual ? "fanblades.fill" : "fanblades",
+      actions: [
+        refresh,
+        {
+          id: "restore",
+          title: "恢复自动控制",
+          type: "fanbar.restore",
+          text: "",
+          icon: "arrow.uturn.backward",
+        },
+      ],
+    },
+  ];
+  presetNames.forEach((title, raw) =>
+    rows.push({
+      id: `preset-${raw}`,
+      title: `切换到${title}预设`,
+      subtitle: "使用 FanBar 已配置的温度曲线",
+      icon:
+        raw === 0
+          ? "speaker.slash.fill"
+          : raw === 3
+            ? "flame.fill"
+            : "gauge.with.dots.needle.67percent",
+      actions: [
+        {
+          id: `preset-${raw}`,
+          title: `应用${title}预设`,
+          type: "fanbar.preset",
+          text: String(raw),
+          icon: "checkmark.circle",
+          shortcut:
+            raw === 0 ? { key: "1", modifiers: ["command"] } : undefined,
+        },
+      ],
+    }),
+  );
+  rows.push({
+    id: "eighty-percent",
+    title: "风扇运行到 80%",
+    subtitle: "按每个风扇的硬件上限计算目标转速",
+    icon: "speedometer",
+    actions: [
+      {
+        id: "eighty",
+        title: "设置为 80%",
+        type: "fanbar.eighty",
+        text: "",
+        icon: "speedometer",
+      },
+    ],
+  });
+  return rows;
+}
+
 export default defineExtension({
   commands: [
     defineSearchCommand({
       id: "fanbar",
-      async query({ query, applications }) {
+      async query({ query, applications, fanbar }) {
         const input = query.trim().toLocaleLowerCase();
         const aliases = new Set([
           "fanbar",
@@ -77,18 +157,29 @@ export default defineExtension({
             ],
           };
         }
-        return {
-          items: matches.map((app): ResultItem => ({
-            id: app.id,
-            title: app.name,
-            subtitle: "FanBar · 风扇、温度和散热策略",
-            icon: "fanblades.fill",
-            applicationId: app.id,
-            detail:
-              "FanBar 是独立的菜单栏风扇控制器。选择“打开应用”进入 FanBar 面板。",
-            actions: appActions(app),
-          })),
-        };
+        try {
+          const status = await fanbar.status();
+          const items = statusItems(status);
+          items[0].actions = [
+            ...items[0].actions,
+            ...matches.flatMap(appActions),
+          ];
+          return { items };
+        } catch (error) {
+          return {
+            items: [
+              {
+                id: "fanbar-unavailable",
+                title: "FanBar 控制服务不可用",
+                subtitle: String(
+                  error instanceof Error ? error.message : error,
+                ),
+                icon: "exclamationmark.triangle",
+                actions: [...matches.flatMap(appActions), refresh],
+              },
+            ],
+          };
+        }
       },
     }),
   ],
