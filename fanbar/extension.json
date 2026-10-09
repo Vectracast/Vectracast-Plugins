@@ -1,0 +1,33 @@
+{
+  "manifestVersion": 1,
+  "id": "local.fanbar",
+  "name": "FanBar 风扇控制",
+  "version": "0.1.0",
+  "description": "从 Vectracast 快速打开 FanBar，查看并管理 Mac 风扇、温度和散热策略。",
+  "runtime": "standard-js",
+  "sdk": "0.1",
+  "icon": "fanblades.fill",
+  "entry": "src/index.ts",
+  "commands": [
+    {
+      "id": "fanbar",
+      "title": "FanBar 风扇控制",
+      "keywords": [
+        "fanbar",
+        "cooling",
+        "temperature",
+        "fan-control",
+        "mac-fan"
+      ],
+      "acceptsEmptyQuery": true,
+      "presentation": "list",
+      "searchPlaceholder": "搜索 FanBar…",
+      "icon": "fanblades.fill"
+    }
+  ],
+  "permissions": {
+    "applications": ["read", "open"],
+    "browser": ["open"]
+  },
+  "preferences": []
+}
